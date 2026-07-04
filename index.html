@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarah Cochran</title>
+<style>
+  :root {
+    --bg: #0e0f11;
+    --card: #17181c;
+    --border: #2a2c31;
+    --text: #f2f2f3;
+    --muted: #9a9ca3;
+    --accent: #0a66c2; /* LinkedIn blue */
+    --accent-hover: #0b74d4;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(10, 102, 194, 0.35), transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(124, 58, 237, 0.28), transparent 45%),
+      radial-gradient(circle at 50% 90%, rgba(6, 182, 212, 0.22), transparent 50%),
+      linear-gradient(180deg, #0e0f11, #08090b);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--text);
+    padding: 24px;
+  }
+
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  .card {
+    position: relative;
+    background: rgba(32, 34, 40, 0.82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 16px;
+    padding: 48px 40px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03) inset;
+  }
+
+  .avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    background: linear-gradient(135deg, #0a66c2, #4d94ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  .tagline {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 32px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .badge:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+
+  .badge svg { width: 18px; height: 18px; fill: white; }
+
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: #55575d;
+  }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="avatar">SC</div>
+    <h1>Sarah Cochran</h1>
+    <p class="tagline">Programs Coordinator, Faculty Development Center<br>Furman University<br><span style="opacity:0.75;">Background in Graphic Design</span></p>
+
+    <a class="badge" href="https://www.linkedin.com/in/scochran/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      Connect on LinkedIn
+    </a>
+
+    <footer>&copy; 2026 Sarah Cochran</footer>
+  </div>
+
+</body>
+</html>
