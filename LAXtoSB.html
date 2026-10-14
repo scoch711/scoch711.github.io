@@ -1,0 +1,269 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>LAX to Santa Barbara</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: summary of both plans, a to-scale route map, then the two timelines side by side (stacked on phones). */
+:root{
+  --bg:#eef1f6; --surface:#ffffff; --ink:#1b2333; --muted:#5b6578; --line:#d4dae5;
+  --sea:#d6e3f0; --land:#eef1f6;
+  --a:#0f7a6c; --a-soft:#dcf0ec; --b:#b4502b; --b-soft:#f6e3da; --rail:#4a5570;
+  --warn:#8a5a00; --warn-soft:#fbefd2;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121826; --surface:#1a2233; --ink:#e7ebf3; --muted:#9aa5ba; --line:#2c3650;
+  --sea:#17243a; --land:#121826;
+  --a:#45c4b1; --a-soft:#163a37; --b:#ee8a62; --b-soft:#3f2519; --rail:#9fabc6;
+  --warn:#f0c060; --warn-soft:#3a2f14; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121826; --surface:#1a2233; --ink:#e7ebf3; --muted:#9aa5ba; --line:#2c3650;
+  --sea:#17243a; --land:#121826;
+  --a:#45c4b1; --a-soft:#163a37; --b:#ee8a62; --b-soft:#3f2519; --rail:#9fabc6;
+  --warn:#f0c060; --warn-soft:#3a2f14; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding-block:32px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.15}
+h1{font-size:clamp(2rem,5vw,2.9rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.35rem;font-weight:700}
+h3{font-size:1.05rem;font-weight:700}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header{display:flex;flex-direction:column;gap:8px}
+header p{margin:0;color:var(--muted);max-width:62ch}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.plan.a{border-top:4px solid var(--a)} .plan.b{border-top:4px solid var(--b)}
+.plan .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.total{font-family:var(--mono);font-weight:700;font-size:1.9rem;font-variant-numeric:tabular-nums}
+.plan.a .total{color:var(--a)} .plan.b .total{color:var(--b)}
+.plan ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:4px;color:var(--ink)}
+.pill{display:inline-block;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
+.pill.a{background:var(--a-soft);color:var(--a)} .pill.b{background:var(--b-soft);color:var(--b)}
+.same{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:14px 18px;color:var(--muted)}
+.same strong{color:var(--ink)}
+
+.mapbox{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.mapscroll{overflow-x:auto}
+svg.map{display:block;width:100%;min-width:560px;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.85rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{display:inline-block;width:28px;height:0;border-top:4px solid}
+.maplinks{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none;padding:8px 14px;border-radius:8px;border:1.5px solid currentColor;font-size:.9rem}
+.btn.a{color:var(--a)} .btn.b{color:var(--b)}
+.btn:hover{background:var(--surface);filter:brightness(1.1)}
+a:focus-visible,.btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+
+.timelines{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start}
+.tl{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.tl ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.step{display:grid;grid-template-columns:4.6rem 20px 1fr;column-gap:10px}
+.step .t{font-family:var(--mono);font-weight:700;font-size:.92rem;padding-top:1px;font-variant-numeric:tabular-nums;text-align:right}
+.step .t small{display:block;font-weight:500;color:var(--muted);font-size:.72rem}
+.rail{position:relative;display:flex;justify-content:center}
+.rail::before{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--line)}
+.step:first-child .rail::before{top:9px} .step:last-child .rail::before{bottom:calc(100% - 9px)}
+.dot{position:relative;width:12px;height:12px;border-radius:50%;margin-top:5px;background:var(--surface);border:3px solid}
+.tl.a .dot{border-color:var(--a)} .tl.b .dot{border-color:var(--b)}
+.step.wait .dot{border-style:dotted;border-width:2px}
+.body{padding-bottom:18px;min-width:0;display:flex;flex-direction:column;gap:4px}
+.body p{margin:0;color:var(--muted);font-size:.92rem}
+.body .head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.cost{font-family:var(--mono);font-size:.82rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tl.a .cost{color:var(--a)} .tl.b .cost{color:var(--b)}
+.body a{color:inherit;font-size:.85rem}
+.flag{background:var(--warn-soft);color:var(--warn);border-radius:6px;padding:8px 10px;font-size:.88rem}
+.flag strong{color:inherit}
+.tally{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:4px;font-size:.92rem}
+.tally div{display:flex;justify-content:space-between;gap:12px}
+.tally .sum{font-weight:700;font-size:1rem}
+
+.notes{display:flex;flex-direction:column;gap:10px;color:var(--muted);font-size:.9rem;max-width:72ch}
+.notes ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.notes a{color:var(--ink)}
+@media (prefers-reduced-motion:no-preference){.btn{transition:filter .15s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Overnight arrival · LAX → Santa Barbara</span>
+    <h1>LAX to Santa Barbara</h1>
+    <p>Southwest from Greenville through Nashville, landing at LAX Terminal 1 at 1:30 AM and getting to Santa Barbara by morning. Two ways to do it, side by side, with times and what each step costs per person.</p>
+  </header>
+
+  <section class="plans" aria-label="Plan summaries">
+    <article class="plan a">
+      <div class="row"><span class="pill a">Plan A · The Van Nuys hack</span></div>
+      <div class="row"><h2>FlyAway bus + Amtrak from Van Nuys</h2></div>
+      <div class="row"><span class="total">$44.75</span><span class="eyebrow">per person</span></div>
+      <ul>
+        <li>Cheapest by a lot</li>
+        <li>Wait at the FlyAway terminal, about 2 hours</li>
+        <li>Backup bus at 3:30 AM if the flight is late</li>
+      </ul>
+    </article>
+    <article class="plan b">
+      <div class="row"><span class="pill b">Plan B · Straight to downtown</span></div>
+      <div class="row"><h2>Uber to Union Station + Amtrak</h2></div>
+      <div class="row"><span class="total">$56–81</span><span class="eyebrow">per person</span></div>
+      <ul>
+        <li>One ride, no bus or transfer</li>
+        <li>Wait at LAX until 3:30, then about an hour at Union Station</li>
+        <li>Late-night Uber pricing is unpredictable</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="same"><strong>Same train either way.</strong> Pacific Surfliner 757 leaves Union Station at 5:13 AM, stops at Van Nuys at 5:47 AM, and gets to Santa Barbara at 7:56 AM. Both plans arrive at the exact same time; the difference is cost and where you wait.</div>
+
+  <section class="mapbox" aria-label="Route map">
+    <h2>The route</h2>
+    <div class="mapscroll">
+      <svg class="map" id="map" viewBox="0 0 960 534" role="img" aria-label="Map of the LA area showing LAX, Van Nuys, Union Station and Santa Barbara, with both routes drawn"></svg>
+    </div>
+    <div class="legend">
+      <span><i style="border-color:var(--a)"></i>Plan A: FlyAway bus, then short Uber</span>
+      <span><i style="border-color:var(--b)"></i>Plan B: Uber to Union Station, train to Van Nuys</span>
+      <span><i style="border-color:var(--rail);border-top-style:dashed"></i>Train 757 (both plans)</span>
+    </div>
+    <div class="maplinks">
+      <a class="btn a" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Los+Angeles+International+Airport/7610+Woodley+Ave,+Van+Nuys,+CA+91406/7724+Van+Nuys+Blvd,+Van+Nuys,+CA+91405/209+State+St,+Santa+Barbara,+CA+93101">Open Plan A in Google Maps ↗</a>
+      <a class="btn b" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Los+Angeles+International+Airport/800+N+Alameda+St,+Los+Angeles,+CA+90012/209+State+St,+Santa+Barbara,+CA+93101">Open Plan B in Google Maps ↗</a>
+    </div>
+  </section>
+
+  <section class="timelines" aria-label="Timelines">
+    <div class="tl a">
+      <div><span class="pill a">Plan A</span></div>
+      <h2>FlyAway + Van Nuys</h2>
+      <ol>
+        <li class="step"><div class="t">8:40<small>PM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Depart GSP</h3></div>
+          <p>Southwest WN1953 to Nashville, then WN149 to LAX after a plane change.</p></div></li>
+        <li class="step"><div class="t">1:30<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Land at LAX Terminal 1</h3><span class="cost">$0</span></div>
+          <p>Head down to the Lower/Arrivals level and find the blue FlyAway column outside Terminal 1.</p></div></li>
+        <li class="step"><div class="t">2:30<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>FlyAway bus to Van Nuys</h3><span class="cost">$12.75</span></div>
+          <p>Tap a contactless card or phone to pay on the bus, or buy in the FlyAway app. No cash.</p>
+          <div class="flag"><strong>Backup:</strong> next bus is 3:30 AM if the flight runs late.</div></div></li>
+        <li class="step"><div class="t">~3:20<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Arrive Van Nuys FlyAway terminal</h3><span class="cost">$0</span></div>
+          <p>7610 Woodley Ave. <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=7610+Woodley+Ave+Van+Nuys+CA">Map ↗</a></p></div></li>
+        <li class="step wait"><div class="t">3:20–5:15<small>~2 hr</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Wait at the terminal</h3></div>
+          <p>Reportedly a better place to hang out than the train station.</p></div></li>
+        <li class="step"><div class="t">5:15<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Uber to Van Nuys Amtrak</h3><span class="cost">~$5</span></div>
+          <p>About 2 miles. Around $10 for the ride, split two ways.</p></div></li>
+        <li class="step"><div class="t">5:47<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Train 757 to Santa Barbara</h3><span class="cost">$27</span></div>
+          <p>Van Nuys Station, 7724 Van Nuys Blvd. <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Van+Nuys+Amtrak+Station">Map ↗</a></p></div></li>
+        <li class="step"><div class="t">7:56<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Santa Barbara</h3><span class="cost">$0</span></div>
+          <p>Nathan picks us up at the station, 209 State St.</p></div></li>
+      </ol>
+      <div class="tally">
+        <div><span>FlyAway bus</span><span class="mono">$12.75</span></div>
+        <div><span>Uber (half of ~$10)</span><span class="mono">~$5.00</span></div>
+        <div><span>Amtrak</span><span class="mono">$27.00</span></div>
+        <div class="sum"><span>Per person</span><span class="mono">~$44.75</span></div>
+      </div>
+    </div>
+
+    <div class="tl b">
+      <div><span class="pill b">Plan B</span></div>
+      <h2>Uber to Union Station</h2>
+      <ol>
+        <li class="step"><div class="t">8:40<small>PM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Depart GSP</h3></div>
+          <p>Southwest WN1953 to Nashville, then WN149 to LAX after a plane change.</p></div></li>
+        <li class="step"><div class="t">1:30<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Land at LAX Terminal 1</h3><span class="cost">$0</span></div>
+          <p>Stay inside the terminal for now.</p></div></li>
+        <li class="step wait"><div class="t">1:30–3:30<small>~2 hr</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Wait in Terminal 1</h3></div>
+          <p>Hang out at LAX so we get to Union Station right around 4 AM.</p></div></li>
+        <li class="step"><div class="t">~3:30<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Uber to Union Station</h3><span class="cost">$25–50</span></div>
+          <p>Walk from Terminal 1 to the LAX-it rideshare lot. About 30 minutes to downtown. Roughly $50–100 for the ride, split two ways.</p></div></li>
+        <li class="step"><div class="t">~4:00<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Arrive Union Station</h3><span class="cost">$0</span></div>
+          <p>800 N Alameda St. <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Los+Angeles+Union+Station">Map ↗</a></p>
+          <div class="flag"><strong>Why 4 AM:</strong> Amtrak only lets people into the station from 1 to 4 AM if their train is in that window, so arriving at 4 means we can walk right in.</div></div></li>
+        <li class="step wait"><div class="t">4:00–5:13<small>~1 hr</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Wait at Union Station</h3></div>
+          <p>A coffee shop in the concourse opens at 4 AM on weekdays, 5 AM on weekends.</p></div></li>
+        <li class="step"><div class="t">5:13<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Train 757 to Santa Barbara</h3><span class="cost">$31</span></div>
+          <p>Same train as Plan A, boarding one stop earlier.</p></div></li>
+        <li class="step"><div class="t">7:56<small>AM</small></div><div class="rail"><span class="dot"></span></div>
+          <div class="body"><div class="head"><h3>Santa Barbara</h3><span class="cost">$0</span></div>
+          <p>Nathan picks us up at the station, 209 State St.</p></div></li>
+      </ol>
+      <div class="tally">
+        <div><span>Uber (half of $50–100)</span><span class="mono">$25–50</span></div>
+        <div><span>Amtrak</span><span class="mono">$31</span></div>
+        <div class="sum"><span>Per person</span><span class="mono">~$56–81</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes" aria-label="Notes and sources">
+    <h2>Notes</h2>
+    <ul>
+      <li>All Uber costs assume we split the ride. The FlyAway fare is $12.75 one way.</li>
+      <li>FlyAway to Union Station isn't an option overnight. The last bus leaves LAX at 1:10 AM and the next at 5:40 AM.</li>
+      <li>Times are from the current posted schedules. Amtrak fares change, so check <a target="_blank" rel="noopener" href="https://www.amtrak.com">Amtrak</a> before booking.</li>
+      <li>Sources: <a target="_blank" rel="noopener" href="https://www.flylax.com/flyaway-bus/van-nuys">FlyAway Van Nuys schedule</a>, <a target="_blank" rel="noopener" href="https://www.flylax.com/flyaway-bus/fares-tickets">FlyAway fares</a>, <a target="_blank" rel="noopener" href="https://www.pacificsurfliner.com/globalassets/pdfs/schedules/4427869230_pacific-surfliner-timetable_aww-5-16-26.pdf">Pacific Surfliner timetable</a>, <a target="_blank" rel="noopener" href="https://www.amtrak.com/stations/lax">Amtrak Union Station page</a>.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg", svg=document.getElementById("map");
+  var K=658, C=Math.cos(34*Math.PI/180), PAD=30;
+  function P(lat,lng){return [ (lng+119.80)*C*K+PAD, (34.48-lat)*K+PAD ];}
+  function el(tag,attrs,text){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(text)e.textContent=text;svg.appendChild(e);return e;}
+  function path(pts){return pts.map(function(p,i){var q=P(p[0],p[1]);return (i?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1);}).join(" ");}
+  // land background, then ocean polygon along the real coastline
+  el("rect",{x:0,y:0,width:960,height:534,fill:"var(--land)"});
+  var coast=[[34.40,-119.80],[34.405,-119.70],[34.39,-119.52],[34.27,-119.29],[34.20,-119.25],[34.09,-119.06],[34.03,-118.80],[34.03,-118.52],[33.96,-118.45],[33.85,-118.40],[33.78,-118.35],[33.75,-118.15]];
+  var oc=path(coast)+" L960 534 L0 534 Z";
+  el("path",{d:oc,fill:"var(--sea)",stroke:"var(--line)","stroke-width":1.5});
+  var t=P(33.88,-119.35); el("text",{x:t[0],y:t[1],fill:"var(--muted)","font-family":"var(--mono)","font-size":13,"letter-spacing":"3"},"PACIFIC OCEAN");
+  // places
+  var LAX=[33.9416,-118.4085], VNF=[34.2085,-118.4847], VNA=[34.2112,-118.4485], US=[34.0562,-118.2368], SB=[34.4137,-119.6918];
+  // shared train: Van Nuys to Santa Barbara along the Surfliner line
+  var rail=[VNA,[34.253,-118.599],[34.27,-118.70],[34.285,-118.88],[34.218,-119.03],[34.198,-119.176],[34.278,-119.293],[34.397,-119.52],SB];
+  el("path",{d:path(rail),fill:"none",stroke:"var(--rail)","stroke-width":4,"stroke-dasharray":"10 6","stroke-linecap":"round","stroke-linejoin":"round"});
+  // Plan B: Uber LAX to Union Station, then train to Van Nuys
+  el("path",{d:path([LAX,[34.00,-118.33],US]),fill:"none",stroke:"var(--b)","stroke-width":4,"stroke-linecap":"round","stroke-linejoin":"round"});
+  el("path",{d:path([US,[34.123,-118.259],[34.193,-118.354],VNA]),fill:"none",stroke:"var(--b)","stroke-width":4,"stroke-dasharray":"10 6","stroke-linecap":"round","stroke-linejoin":"round"});
+  // Plan A: FlyAway up the 405, then Uber to the station
+  el("path",{d:path([LAX,[34.04,-118.43],[34.12,-118.475],VNF]),fill:"none",stroke:"var(--a)","stroke-width":4,"stroke-linecap":"round","stroke-linejoin":"round"});
+  el("path",{d:path([VNF,VNA]),fill:"none",stroke:"var(--a)","stroke-width":4,"stroke-linecap":"round"});
+  // stops
+  function stop(ll,label,sub,dx,dy,anchor,color){var p=P(ll[0],ll[1]);
+    el("circle",{cx:p[0],cy:p[1],r:7,fill:"var(--surface)",stroke:color,"stroke-width":3});
+    el("text",{x:p[0]+dx,y:p[1]+dy,"text-anchor":anchor,fill:"var(--ink)","font-family":"var(--display)","font-weight":700,"font-size":16},label);
+    if(sub)el("text",{x:p[0]+dx,y:p[1]+dy+17,"text-anchor":anchor,fill:"var(--muted)","font-family":"var(--mono)","font-size":12},sub);}
+  stop(LAX,"LAX","land 1:30",14,5,"start","var(--ink)");
+  stop(VNF,"FlyAway terminal","3:20 to 5:15",-14,-6,"end","var(--a)");
+  stop(VNA,"Van Nuys Amtrak","train 5:47",14,-14,"start","var(--rail)");
+  stop(US,"Union Station","train 5:13",-14,22,"end","var(--b)");
+  stop(SB,"Santa Barbara","arrive 7:56",14,-12,"start","var(--ink)");
+  // scale bar: 10 miles
+  var mi=10/69/ C; var a=P(33.80,-119.70), b=P(33.80,-119.70+10/(69*C));
+  el("line",{x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:"var(--muted)","stroke-width":2});
+  el("text",{x:a[0],y:a[1]-8,fill:"var(--muted)","font-family":"var(--mono)","font-size":12},"10 mi");
+})();
+</script>
+
+</body></html>
